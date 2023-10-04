@@ -1,7 +1,18 @@
 # Custom project from Hilla
 
-This project can be used as a starting point to create your own Hilla application with Spring Boot.
-It contains all the necessary configuration and some placeholder files to get you started.
+This project can be used as a starting point for DX Testing of Hilla React new features for presenting database data in a grid fast and simple.
+
+## Task description:
+You have been given a simple Hilla React application that contains a view for listing the users.
+The User entity and other associated entities have been already created. Your task is to make this view functional:
+
+1. Have a grid for listing all properties of the existing users.
+2. Hide the “password” and “zip code” columns.
+3. Check whether header filtering is working as expected.
+4. Disable header filters.
+5. Make the custom filter text field on top of the grid functional in a way that it filters out the records that don’t have the filter text in either of the “first name” or “last name” fields.
+6. Change the order of appearance for the columns as follows:
+    - First name, Last name, Email, Street Address, City, Country
 
 ## Running the application
 
