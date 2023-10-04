@@ -1,5 +1,3 @@
-# Custom project from Hilla
-
 This project can be used as a starting point for DX Testing of Hilla React new features for presenting database data in a grid fast and simple.
 
 ## Task description:
