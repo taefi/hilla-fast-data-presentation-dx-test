@@ -1,6 +1,8 @@
 package com.example.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -18,6 +20,7 @@ public class User {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private LocalDate joinedDate;
@@ -25,7 +28,10 @@ public class User {
     @Version
     private Long version;
 
-    @ManyToOne
+    private int failedLoginCount;
+
+    @OneToOne
+    @NotNull
     private Address address;
 
     public Long getId() {
@@ -82,6 +88,14 @@ public class User {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public int getFailedLoginCount() {
+        return failedLoginCount;
+    }
+
+    public void setFailedLoginCount(int failedLogins) {
+        this.failedLoginCount = failedLogins;
     }
 
     public Address getAddress() {

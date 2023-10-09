@@ -3,6 +3,8 @@ import {TextField} from "@hilla/react-components/TextField";
 import UserModel from "Frontend/generated/com/example/application/entity/UserModel";
 import {AutoGrid} from "@hilla/react-grid";
 import {SolutionUserListingService} from "Frontend/generated/endpoints";
+import Matcher from "Frontend/generated/dev/hilla/crud/filter/PropertyStringFilter/Matcher";
+
 
 export default function ListUsersSolutionView() {
     const [filterValue, setFilterValue] = useState("");
@@ -10,13 +12,13 @@ export default function ListUsersSolutionView() {
         const firstNameFilter: any = {
             t: 'propertyString',
             propertyId: 'firstName',
-            matcher: 'CONTAINS',
+            matcher: Matcher.CONTAINS,
             filterValue: filterValue,
         };
         const lastNameFilter: any = {
             t: 'propertyString',
             propertyId: 'lastName',
-            matcher: 'CONTAINS',
+            matcher: Matcher.CONTAINS,
             filterValue: filterValue,
         };
         return {t: 'or', children: [firstNameFilter, lastNameFilter]};
@@ -33,9 +35,8 @@ export default function ListUsersSolutionView() {
             <AutoGrid
                 service={SolutionUserListingService}
                 model={UserModel}
-                visibleColumns={['firstName', 'lastName', 'email', 'joinedDate']}
-                noHeaderFilters
                 filter={compoundFilter}
+                /*visibleColumns={['streetAddress','zipCode','email','firstName','lastName','joinedDate','failedLoginCount']}*/
             />
         </div>
     );

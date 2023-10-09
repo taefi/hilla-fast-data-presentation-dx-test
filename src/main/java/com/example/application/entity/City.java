@@ -1,6 +1,7 @@
 package com.example.application.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cities")
@@ -13,6 +14,7 @@ public class City {
     private String name;
 
     @ManyToOne
+    @NotNull
     private Country country;
 
     public Long getId() {

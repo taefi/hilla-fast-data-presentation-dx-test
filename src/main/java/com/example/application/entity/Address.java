@@ -3,6 +3,7 @@ package com.example.application.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "addresses")
@@ -16,9 +17,10 @@ public class Address {
 
     @Min(10000)
     @Max(99999)
-    private Integer zipCode;
+    private int zipCode;
 
     @ManyToOne
+    @NotNull
     private City city;
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class Address {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public City getCity() {

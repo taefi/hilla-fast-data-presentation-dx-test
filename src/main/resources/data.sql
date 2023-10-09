@@ -220,7 +220,7 @@ INSERT INTO addresses (street_address, zip_code, city_id) VALUES ('7890 Birch Pl
 INSERT INTO addresses (street_address, zip_code, city_id) VALUES ('2345 Pine Rd', 60002, 20);
 
 -- User Data
-INSERT INTO users (first_name, last_name, email, password, joined_date, version, address_id)
+INSERT INTO users (first_name, last_name, email, password, joined_date, version, failed_login_count, address_id)
 SELECT
     CASE
         WHEN MOD(sequence_num, 10) = 0 THEN 'John'
@@ -254,7 +254,8 @@ SELECT
     'password' || sequence_num,
     DATEADD('DAY', -FLOOR(RAND() * 365), CURRENT_DATE()),
     1,
-    FLOOR(RAND() * (SELECT MAX(id) FROM addresses)) + 1
+    FLOOR(RAND() * 10),
+    SEQUENCE_NUM
 FROM (
-         SELECT x as SEQUENCE_NUM FROM SYSTEM_RANGE(1, 500)
+         SELECT x as SEQUENCE_NUM FROM SYSTEM_RANGE(1, 140)
      );
