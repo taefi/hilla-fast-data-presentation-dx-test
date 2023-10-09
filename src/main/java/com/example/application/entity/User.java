@@ -1,6 +1,5 @@
 package com.example.application.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,7 +19,6 @@ public class User {
 
     private String email;
 
-    @JsonIgnore
     private String password;
 
     private LocalDate joinedDate;
