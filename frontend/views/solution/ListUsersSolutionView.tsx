@@ -57,8 +57,9 @@ export default function ListUsersSolutionView() {
             <AutoGrid
                 service={SolutionUserListingService}
                 model={UserModel}
-                noHeaderFilters
-                experimentalFilter={compoundFilter}
+                /* Uncomment the following to use the compound filter */
+                /* noHeaderFilters */
+                /* experimentalFilter={compoundFilter} */
                 columnOptions={{'failedLoginCount': {renderer: FailedLoginCountRenderer}}}
                 visibleColumns={['email', 'joinedDate', 'failedLoginCount', 'address.streetAddress']}
                 customColumns={[<GridColumn autoWidth renderer={FullNameRenderer} header='Full Name' />,
