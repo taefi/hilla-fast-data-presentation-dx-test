@@ -220,7 +220,7 @@ INSERT INTO addresses (street_address, zip_code, city_id) VALUES ('7890 Birch Pl
 INSERT INTO addresses (street_address, zip_code, city_id) VALUES ('2345 Pine Rd', 60002, 20);
 
 -- User Data
-INSERT INTO users (first_name, last_name, email, password, joined_date, version, failed_login_count, address_id)
+INSERT INTO users (first_name, last_name, password, joined_date, version, failed_login_count, address_id)
 SELECT
     CASE
         WHEN MOD(sequence_num, 10) = 0 THEN 'John'
@@ -246,11 +246,6 @@ SELECT
         WHEN MOD(sequence_num, 10) = 8 THEN 'Garcia'
         WHEN MOD(sequence_num, 10) = 9 THEN 'Williams'
         END,
-    CASE
-        WHEN MOD(sequence_num, 3) = 0 THEN 'google.com'
-        WHEN MOD(sequence_num, 3) = 1 THEN 'hotmail.com'
-        WHEN MOD(sequence_num, 3) = 2 THEN 'yahoo.com'
-        END,
     'password' || sequence_num,
     DATEADD('DAY', -FLOOR(RAND() * 365), CURRENT_DATE()),
     1,
@@ -259,3 +254,11 @@ SELECT
 FROM (
          SELECT x as SEQUENCE_NUM FROM SYSTEM_RANGE(1, 140)
      );
+
+update users set email = CONCAT(first_name, '.', last_name, '@',
+        CASE
+            WHEN MOD(FLOOR(RAND() * 3), 3) = 0 THEN 'google.com'
+            WHEN MOD(FLOOR(RAND() * 3), 3) = 1 THEN 'hotmail.com'
+            WHEN MOD(FLOOR(RAND() * 3), 3) = 2 THEN 'yahoo.com'
+            ELSE 'facebook.com'
+            END);
