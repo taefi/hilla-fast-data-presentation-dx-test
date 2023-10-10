@@ -10,22 +10,22 @@ import {GridColumn} from "@hilla/react-components/GridColumn";
 function FailedLoginCountRenderer({ item }: { item: User }) {
     const { failedLoginCount, id } = item;
     const color = failedLoginCount > 6 ? 'red' : failedLoginCount > 3 ? 'orange' : 'green';
-    return <span key={'failed-login-count-renderer' + id} style={{ fontWeight: 'bold', color }}>{failedLoginCount}</span>;
+    return <span style={{ fontWeight: 'bold', color }}>{failedLoginCount}</span>;
 }
 
 function FullNameRenderer({ item }: { item: User }) {
     const { firstName, lastName, id } = item;
-    return <span key={'full-name-renderer' + id}>{firstName} {lastName}</span>;
+    return <span>{firstName} {lastName}</span>;
 }
 
 function CityNameRenderer({ item }: { item: User }) {
     const { address, id} = item;
-    return <span key={'city-renderer-' + id}>{address?.city?.name}</span>;
+    return <span>{address?.city?.name}</span>;
 }
 
 function CountryNameRenderer({ item }: { item: User }) {
     const { address, id} = item;
-    return <span key={'country-renderer-' + id}>{address?.city?.country?.name}</span>;
+    return <span>{address?.city?.country?.name}</span>;
 }
 
 export default function ListUsersSolutionView() {
@@ -48,23 +48,22 @@ export default function ListUsersSolutionView() {
 
     return (
         <div className="flex flex-col items-start gap-m p-l">
-            {<TextField
+            <TextField
                 style={{width: '20em'}}
                 value={filterValue}
                 onValueChanged={(e) => setFilterValue(e.detail.value)}
                 label="Filter by first or last name:"
-            />}
+            />
             <AutoGrid
                 service={SolutionUserListingService}
                 model={UserModel}
-                /* Uncomment the following to use the compound filter */
-                /* noHeaderFilters */
-                /* experimentalFilter={compoundFilter} */
+                noHeaderFilters
+                experimentalFilter={compoundFilter}
                 columnOptions={{'failedLoginCount': {renderer: FailedLoginCountRenderer}}}
                 visibleColumns={['email', 'joinedDate', 'failedLoginCount', 'address.streetAddress']}
-                customColumns={[<GridColumn autoWidth renderer={FullNameRenderer} header='Full Name' />,
-                                <GridColumn autoWidth renderer={CityNameRenderer} header='City' />,
-                                <GridColumn autoWidth renderer={CountryNameRenderer} header='Country' />]}
+                customColumns={[<GridColumn key={1} autoWidth renderer={FullNameRenderer} header='Full Name' />,
+                                <GridColumn key={2} autoWidth renderer={CityNameRenderer} header='City' />,
+                                <GridColumn key={3} autoWidth renderer={CountryNameRenderer} header='Country' />]}
             />
         </div>
     );
